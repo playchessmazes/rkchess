@@ -45,6 +45,62 @@ const calculateCategory = (dobString: string): string => {
   return "open";
 };
 
+// Helper function to compress images using HTML5 Canvas client-side
+const compressImage = (
+  file: File, 
+  maxWidth = 1000, 
+  maxHeight = 1000, 
+  quality = 0.7
+): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new window.Image();
+      img.src = event.target?.result as string;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        let width = img.width;
+        let height = img.height;
+
+        // Calculate new dimensions to maintain aspect ratio
+        if (width > height) {
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          resolve(event.target?.result as string); // fallback to original if context not supported
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        // Convert to jpeg with specified quality (great compression ratio)
+        const compressedBase64 = canvas.toDataURL("image/jpeg", quality);
+        resolve(compressedBase64);
+      };
+      img.onerror = (err) => {
+        reject(err);
+      };
+    };
+    reader.onerror = (err) => {
+      reject(err);
+    };
+  });
+};
+
 export default function RegistrationForm() {
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
@@ -110,8 +166,8 @@ export default function RegistrationForm() {
     }
   };
 
-  // Convert uploaded image to base64 for submission
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Convert and compress uploaded image to base64 for submission
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       // Validate file type
@@ -122,19 +178,14 @@ export default function RegistrationForm() {
         }));
         return;
       }
-      // Validate file size (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        setErrors((prev) => ({ 
-          ...prev, 
-          paymentScreenshot: "Image size must be smaller than 5MB" 
-        }));
-        return;
-      }
 
       setFileName(file.name);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData((prev) => ({ ...prev, paymentScreenshot: reader.result as string }));
+      
+      try {
+        // Compress image to max 1000px width/height and 70% quality in browser
+        const compressedBase64 = await compressImage(file, 1000, 1000, 0.7);
+        setFormData((prev) => ({ ...prev, paymentScreenshot: compressedBase64 }));
+        
         if (errors.paymentScreenshot) {
           setErrors((prev) => {
             const next = { ...prev };
@@ -142,8 +193,22 @@ export default function RegistrationForm() {
             return next;
           });
         }
-      };
-      reader.readAsDataURL(file);
+      } catch (err) {
+        console.error("Image compression failed, using original file:", err);
+        // Fallback to original uncompressed file if compression fails
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setFormData((prev) => ({ ...prev, paymentScreenshot: reader.result as string }));
+          if (errors.paymentScreenshot) {
+            setErrors((prev) => {
+              const next = { ...prev };
+              delete next.paymentScreenshot;
+              return next;
+            });
+          }
+        };
+        reader.readAsDataURL(file);
+      }
     }
   };
 
