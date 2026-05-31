@@ -30,12 +30,12 @@ export async function POST(request: Request) {
     const isSupabaseConfigured = 
       process.env.NEXT_PUBLIC_SUPABASE_URL && 
       process.env.NEXT_PUBLIC_SUPABASE_URL !== "YOUR_SUPABASE_URL_HERE" &&
-      process.env.SUPABASE_SERVICE_ROLE_KEY && 
-      process.env.SUPABASE_SERVICE_ROLE_KEY !== "YOUR_SUPABASE_SERVICE_ROLE_KEY_HERE";
+      ((process.env.SUPABASE_SERVICE_ROLE_KEY && process.env.SUPABASE_SERVICE_ROLE_KEY !== "YOUR_SUPABASE_SERVICE_ROLE_KEY_HERE") ||
+       (process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY !== "YOUR_SUPABASE_PUBLISHABLE_KEY_HERE"));
 
     if (!isSupabaseConfigured) {
       return NextResponse.json(
-        { error: "Supabase database credentials are not configured yet. Please update the .env.local file with your Project URL and Service Role Key." },
+        { error: "Supabase database credentials are not configured yet. Please update the .env.local file with your Project URL and API Key." },
         { status: 500 }
       );
     }
