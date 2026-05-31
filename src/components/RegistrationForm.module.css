@@ -1,0 +1,626 @@
+/* Light Theme CSS Modules for RK Chess Academy Registration Form */
+
+.formContainer {
+  width: 100%;
+}
+
+.form {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: var(--transition-smooth);
+}
+
+@media (min-width: 640px) {
+  .form {
+    padding: 2.25rem;
+  }
+}
+
+.formAlert {
+  background-color: var(--error-bg);
+  border-left: 4px solid var(--error);
+  color: var(--error);
+  padding: 0.85rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--brand-green);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sectionIcon {
+  color: var(--brand-green);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.fieldGroup label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.required {
+  color: var(--brand-red);
+}
+
+.optionalLabel {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 0.85rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: var(--transition-smooth);
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.5rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+/* Specific select padding correction */
+.select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 1.1rem;
+  padding-right: 2.25rem;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Focus state styling */
+.input:focus,
+.select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.1);
+  background-color: #ffffff;
+}
+
+.input:focus + .inputIcon,
+.select:focus + .inputIcon {
+  color: var(--brand-green);
+}
+
+/* Error validation states */
+.hasError .input,
+.hasError .select {
+  border-color: var(--error);
+  background-color: var(--error-bg);
+}
+
+.hasError .inputIcon {
+  color: var(--error);
+}
+
+.errorText {
+  color: var(--error);
+  font-size: 0.75rem;
+  margin-top: 0.15rem;
+}
+
+/* Collapsible Section Container */
+.collapsibleContainer {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-secondary);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.collapseToggle {
+  width: 100%;
+  padding: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.collapseToggle:hover {
+  color: var(--brand-green);
+  background-color: rgba(21, 128, 61, 0.03);
+}
+
+.collapsibleContent {
+  padding: 0 1rem 1rem;
+  border-top: 1px solid var(--border-color);
+  background-color: #ffffff;
+  animation: slideDown 0.25s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Submit Button */
+.submitBtn {
+  margin-top: 0.5rem;
+  padding: 0.9rem 1.5rem;
+  background-color: var(--brand-green);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition-bounce);
+  box-shadow: 0 4px 12px rgba(21, 128, 61, 0.2);
+}
+
+.submitBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background-color: #166534;
+  box-shadow: 0 6px 15px rgba(21, 128, 61, 0.35);
+}
+
+.submitBtn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.submitBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Success Card styling */
+.successCard {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2.25rem 1.5rem;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.successIconWrapper {
+  width: 76px;
+  height: 76px;
+  background-color: var(--success-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  border: 2px solid rgba(22, 163, 74, 0.2);
+}
+
+.successIcon {
+  color: var(--success);
+}
+
+.successTitle {
+  font-size: 1.65rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.successSubtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.75rem;
+}
+
+/* Receipt/Ticket shape for player confirmation slip */
+.ticket {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1.75rem;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+}
+
+/* Ticket jagged edge simulation left and right */
+.ticket::before,
+.ticket::after {
+  content: "";
+  position: absolute;
+  top: 45px; /* Alignment with divider */
+  width: 12px;
+  height: 12px;
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+}
+
+.ticket::before {
+  left: -7px;
+}
+
+.ticket::after {
+  right: -7px;
+}
+
+.ticketRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.ticketIdWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ticketId {
+  background-color: #f0fdf4;
+  color: var(--brand-green);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 1px dashed rgba(21, 128, 61, 0.3);
+}
+
+.copyBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  transition: var(--transition-smooth);
+}
+
+.copyBtn:hover {
+  color: var(--brand-green);
+}
+
+.copiedIcon {
+  color: var(--success);
+}
+
+.ticketDivider {
+  border-top: 1px dashed var(--border-color);
+  margin: 0.75rem 0;
+  height: 0;
+}
+
+.ticketGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+@media (min-width: 480px) {
+  .ticketGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ticketItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.ticketLabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ticketValue {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.successActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .successActions {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.btnPrimaryWhatsapp {
+  background-color: #25d366;
+  color: #ffffff;
+  border: 1px solid #20ba59;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+  text-align: center;
+}
+
+.btnPrimaryWhatsapp:hover {
+  background-color: #20ba59;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(37, 211, 102, 0.35);
+}
+
+.btnPrimaryWhatsapp:active {
+  transform: translateY(1px);
+}
+
+.btnSecondary {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  color: var(--brand-green);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-align: center;
+}
+
+.btnSecondary:hover {
+  background-color: var(--brand-green-light);
+  border-color: var(--brand-green);
+}
+
+.autoSelectNote {
+  font-size: 0.75rem;
+  color: var(--brand-green);
+  margin-top: 0.25rem;
+  font-weight: 500;
+  display: block;
+}
+
+.paymentInstruction {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.paymentBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 1.25rem;
+  border-radius: 12px;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .paymentBox {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+}
+
+.qrContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .qrContainer {
+    width: auto;
+  }
+}
+
+.qrImageWrapper {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qrImage {
+  display: block;
+}
+
+.qrLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--brand-green);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fileUploadWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+  width: 100%;
+}
+
+.fileUploadBtn {
+  background-color: #ffffff;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+.fileUploadBtn:hover {
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+  background-color: var(--brand-green-light);
+}
+
+.fileInputHidden {
+  display: none;
+}
+
+.fileNameText {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 130px;
+}
+
+@media (min-width: 480px) {
+  .fileNameText {
+    max-width: 260px;
+  }
+}
+
+.previewContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(22, 163, 74, 0.2);
+  border-radius: 8px;
+  background-color: var(--brand-green-light);
+  width: 100%;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.previewImage {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+.previewLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--brand-green);
+}
