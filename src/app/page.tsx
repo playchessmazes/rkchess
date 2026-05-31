@@ -109,20 +109,21 @@ export default function Home() {
                 </h3>
 
                 <div className={styles.highlightSection}>
-                  <h4 className={styles.highlightGroupTitle}>Age Categories (Boys & Girls)</h4>
+                  <h4 className={styles.highlightGroupTitle}>Tournament Categories</h4>
                   <div className={styles.categoryPills}>
                     <span className={styles.categoryPill}>Under 7</span>
                     <span className={styles.categoryPill}>Under 9</span>
                     <span className={styles.categoryPill}>Under 11</span>
                     <span className={styles.categoryPill}>Under 13</span>
                     <span className={styles.categoryPill}>Under 15</span>
+                    <span className={`${styles.categoryPill} ${styles.openCategoryPill}`}>Open Category</span>
                   </div>
                 </div>
 
                 <div className={styles.infoRow}>
                   <div className={styles.infoRowIcon}><Trophy size={16} /></div>
                   <div className={styles.infoRowText}>
-                    <strong>Trophies & Awards:</strong> Top 3 Trophies in each age category. Every participant receives a <strong>Certificate and Medal</strong>!
+                    <strong>Trophies & Awards:</strong> Top 3 Trophies in each age category and the Open Category (Total 33 Trophies). Every participant receives a <strong>Certificate and Medal</strong>!
                   </div>
                 </div>
 

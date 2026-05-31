@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { 
   User, Calendar, Users, Phone, Mail, 
   Award, Hash, Trophy, School, MapPin, 
-  Loader2, CheckCircle2, Copy, Check, ChevronDown, ChevronUp,
+  Loader2, CheckCircle2, Copy, Check,
   CreditCard, Upload
 } from "lucide-react";
 import Image from "next/image";
@@ -65,7 +65,6 @@ export default function RegistrationForm() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [regId, setRegId] = useState("");
   const [copied, setCopied] = useState(false);
-  const [showChessDetails, setShowChessDetails] = useState(false);
   const [fileName, setFileName] = useState("");
 
   // Categories containing both the flyer age limits and Open (All Ages) for older players
@@ -278,7 +277,6 @@ export default function RegistrationForm() {
     setFileName("");
     setSubmitSuccess(false);
     setRegId("");
-    setShowChessDetails(false);
   };
 
   // Helper to show calculated age
@@ -617,57 +615,49 @@ _Note: Payment screenshot uploaded successfully._`;
           </div>
         </div>
 
-        {/* Section 3: Collapsible Chess Details */}
-        <div className={styles.collapsibleContainer}>
-          <button
-            type="button"
-            onClick={() => setShowChessDetails(!showChessDetails)}
-            className={styles.collapseToggle}
-          >
-            <span>Do you have a FIDE ID or FIDE Rating?</span>
-            {showChessDetails ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-          </button>
-
-          {showChessDetails && (
-            <div className={styles.collapsibleContent}>
-              <div className={styles.grid}>
-                <div className={styles.fieldGroup}>
-                  <label htmlFor="fideId">FIDE ID <span className={styles.optionalLabel}>(Optional)</span></label>
-                  <div className={styles.inputWrapper}>
-                    <Hash className={styles.inputIcon} size={16} />
-                    <input
-                      type="text"
-                      id="fideId"
-                      name="fideId"
-                      value={formData.fideId}
-                      onChange={handleInputChange}
-                      placeholder="e.g. 12345678"
-                      className={styles.input}
-                    />
-                  </div>
-                </div>
-
-                <div className={`${styles.fieldGroup} ${errors.fideRating ? styles.hasError : ""}`}>
-                  <label htmlFor="fideRating">FIDE Rating <span className={styles.optionalLabel}>(Optional)</span></label>
-                  <div className={styles.inputWrapper}>
-                    <Award className={styles.inputIcon} size={16} />
-                    <input
-                      type="number"
-                      id="fideRating"
-                      name="fideRating"
-                      value={formData.fideRating}
-                      onChange={handleInputChange}
-                      placeholder="e.g. 1100"
-                      className={styles.input}
-                      min="0"
-                      max="3000"
-                    />
-                  </div>
-                  {errors.fideRating && <span className={styles.errorText}>{errors.fideRating}</span>}
-                </div>
+        {/* Section 3: FIDE Chess Details (Optional) */}
+        <div className={styles.section}>
+          <h3 className={styles.sectionTitle}>
+            <Award size={18} className={styles.sectionIcon} />
+            FIDE Details (Optional)
+          </h3>
+          
+          <div className={styles.grid}>
+            <div className={styles.fieldGroup}>
+              <label htmlFor="fideId">FIDE ID <span className={styles.optionalLabel}>(Optional)</span></label>
+              <div className={styles.inputWrapper}>
+                <Hash className={styles.inputIcon} size={16} />
+                <input
+                  type="text"
+                  id="fideId"
+                  name="fideId"
+                  value={formData.fideId}
+                  onChange={handleInputChange}
+                  placeholder="e.g. 12345678"
+                  className={styles.input}
+                />
               </div>
             </div>
-          )}
+
+            <div className={`${styles.fieldGroup} ${errors.fideRating ? styles.hasError : ""}`}>
+              <label htmlFor="fideRating">FIDE Rating <span className={styles.optionalLabel}>(Optional)</span></label>
+              <div className={styles.inputWrapper}>
+                <Award className={styles.inputIcon} size={16} />
+                <input
+                  type="number"
+                  id="fideRating"
+                  name="fideRating"
+                  value={formData.fideRating}
+                  onChange={handleInputChange}
+                  placeholder="e.g. 1100"
+                  className={styles.input}
+                  min="0"
+                  max="3000"
+                />
+              </div>
+              {errors.fideRating && <span className={styles.errorText}>{errors.fideRating}</span>}
+            </div>
+          </div>
         </div>
 
         <button 
