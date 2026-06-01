@@ -183,7 +183,7 @@ export default function Home() {
               <div className={styles.formCardHeader}>
                 <h3 className={styles.formCardTitle}>Register for Summer Open</h3>
                 <p className={styles.formCardSubtitle}>
-                  Online registration is mandatory. Entry fee of ₹300 is to be paid at the venue.
+                  Online registration is mandatory. Pay the entry fee of ₹300 using the UPI QR code below.
                 </p>
               </div>
               <RegistrationForm />
