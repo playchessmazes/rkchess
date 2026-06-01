@@ -1,0 +1,241 @@
+.adminPage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-secondary);
+}
+
+.adminContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+}
+
+.authCard {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.authCard:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+}
+
+/* Header Branding inside Card */
+.authHeader {
+  padding: 2rem 2rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #ffffff;
+}
+
+.logoWrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 0.75rem;
+  border: 2px solid var(--brand-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+}
+
+.logoImage {
+  object-fit: contain;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--brand-red);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  font-weight: 700;
+  color: var(--brand-purple);
+  text-transform: uppercase;
+  margin-top: 0.15rem;
+}
+
+/* Tabs for Login vs Register */
+.tabs {
+  display: flex;
+  background-color: #f1f5f9;
+  padding: 0.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tabButton {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+}
+
+.tabButton:hover {
+  color: var(--text-primary);
+}
+
+.activeTab {
+  background-color: #ffffff;
+  color: var(--brand-green);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Form layout */
+.form {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: var(--transition-smooth);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.1);
+}
+
+.btnSubmit {
+  width: 100%;
+  padding: 0.85rem;
+  background-color: var(--brand-green);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 10px rgba(21, 128, 61, 0.2);
+  transition: var(--transition-bounce);
+}
+
+.btnSubmit:hover:not(:disabled) {
+  background-color: #116630;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(21, 128, 61, 0.3);
+}
+
+.btnSubmit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btnSubmit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Spinner and Alert elements */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.alert {
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.alertError {
+  background-color: var(--error-bg);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  color: var(--error);
+}
+
+.alertSuccess {
+  background-color: var(--success-bg);
+  border: 1px solid rgba(22, 163, 74, 0.2);
+  color: var(--success);
+}
+
+.alertIcon {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* Footer Section inside admin root page */
+.footer {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 1.5rem 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.footerCopyright {
+  color: var(--text-secondary);
+  font-weight: 500;
+}

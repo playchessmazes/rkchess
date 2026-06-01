@@ -12,7 +12,8 @@ import {
   Users,
   CreditCard,
   Calendar,
-  AlertTriangle
+  AlertTriangle,
+  LogOut
 } from "lucide-react";
 import Link from "next/link";
 import styles from "./AdminDashboard.module.css";
@@ -36,9 +37,10 @@ interface Registration {
 interface AdminDashboardProps {
   initialData: Registration[];
   error?: string;
+  onLogout?: () => void;
 }
 
-export default function AdminDashboard({ initialData, error }: AdminDashboardProps) {
+export default function AdminDashboard({ initialData, error, onLogout }: AdminDashboardProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
   const [selectedScreenshot, setSelectedScreenshot] = useState<{ url: string; name: string } | null>(null);
@@ -134,6 +136,12 @@ export default function AdminDashboard({ initialData, error }: AdminDashboardPro
             <ArrowLeft size={16} />
             Back to Form
           </Link>
+          {onLogout && (
+            <button onClick={onLogout} className={`${styles.btnAction} ${styles.btnSecondary}`}>
+              <LogOut size={16} />
+              Logout
+            </button>
+          )}
           {filteredCount > 0 && (
             <button onClick={downloadCSV} className={`${styles.btnAction} ${styles.btnPrimary}`}>
               <Download size={16} />
