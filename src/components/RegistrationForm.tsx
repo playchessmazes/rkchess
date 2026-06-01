@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { 
-  User, Calendar, Users, Phone, Mail, 
-  Award, Hash, Trophy, School, MapPin, 
+  User, Calendar, Users, Phone, 
+  Award, Hash, Trophy, MapPin, 
   Loader2, CheckCircle2, Copy, Check,
   CreditCard, Upload
 } from "lucide-react";
@@ -15,11 +15,9 @@ interface FormData {
   dob: string;
   gender: string;
   mobile: string;
-  email: string;
   fideId: string;
   fideRating: string;
   category: string;
-  academyName: string;
   cityState: string;
   paymentScreenshot: string; // Base64 representation of the payment screenshot
 }
@@ -107,11 +105,9 @@ export default function RegistrationForm() {
     dob: "",
     gender: "",
     mobile: "",
-    email: "",
     fideId: "",
     fideRating: "",
     category: "",
-    academyName: "",
     cityState: "Anantapur, Andhra Pradesh", // Prefill for convenience
     paymentScreenshot: "",
   });
@@ -246,13 +242,7 @@ export default function RegistrationForm() {
       newErrors.mobile = "Enter a valid 10-digit mobile number";
     }
 
-    // Email (Optional - validate only if provided)
-    if (formData.email.trim()) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(formData.email)) {
-        newErrors.email = "Enter a valid email address";
-      }
-    }
+    // No email validation needed
 
     // Category
     if (!formData.category) {
@@ -330,11 +320,9 @@ export default function RegistrationForm() {
       dob: "",
       gender: "",
       mobile: "",
-      email: "",
       fideId: "",
       fideRating: "",
       category: "",
-      academyName: "",
       cityState: "Anantapur, Andhra Pradesh",
       paymentScreenshot: "",
     });
@@ -364,7 +352,6 @@ export default function RegistrationForm() {
 *Date of Birth:* ${formData.dob}
 *Category:* ${selectedCatLabel}
 *WhatsApp No:* ${formData.mobile}
-${formData.academyName ? `*School/Club:* ${formData.academyName}` : ""}
 *City & State:* ${formData.cityState}
 ${formData.fideId ? `*FIDE ID:* ${formData.fideId}` : ""}
 ${formData.fideRating ? `*FIDE Rating:* ${formData.fideRating}` : ""}
@@ -416,12 +403,7 @@ _Note: Payment screenshot uploaded successfully._`;
               <span className={styles.ticketLabel}>City & State</span>
               <span className={styles.ticketValue}>{formData.cityState}</span>
             </div>
-            {formData.email && (
-              <div className={styles.ticketItem} style={{ gridColumn: "1 / -1" }}>
-                <span className={styles.ticketLabel}>Email</span>
-                <span className={styles.ticketValue}>{formData.email}</span>
-              </div>
-            )}
+            {/* Email display removed */}
           </div>
         </div>
 
@@ -580,38 +562,7 @@ _Note: Payment screenshot uploaded successfully._`;
               {errors.cityState && <span className={styles.errorText}>{errors.cityState}</span>}
             </div>
 
-            <div className={`${styles.fieldGroup} ${styles.fullWidth}`}>
-              <label htmlFor="academyName">School / Club Name</label>
-              <div className={styles.inputWrapper}>
-                <School className={styles.inputIcon} size={16} />
-                <input
-                  type="text"
-                  id="academyName"
-                  name="academyName"
-                  value={formData.academyName}
-                  onChange={handleInputChange}
-                  placeholder="Name of school or academy"
-                  className={styles.input}
-                />
-              </div>
-            </div>
-
-            <div className={`${styles.fieldGroup} ${styles.fullWidth} ${errors.email ? styles.hasError : ""}`}>
-              <label htmlFor="email">Email Address <span className={styles.optionalLabel}>(Optional)</span></label>
-              <div className={styles.inputWrapper}>
-                <Mail className={styles.inputIcon} size={16} />
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder="parent@example.com (optional)"
-                  className={styles.input}
-                />
-              </div>
-              {errors.email && <span className={styles.errorText}>{errors.email}</span>}
-            </div>
+            {/* School / Club Name and Email Address fields have been removed */}
           </div>
         </div>
 
