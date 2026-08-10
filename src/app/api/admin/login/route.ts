@@ -15,7 +15,7 @@ export async function POST(request: Request) {
 
     const normalizedUser = username.toLowerCase().trim();
     
-    // Static admin credentials check
+    // Admin credentials check
     if (normalizedUser !== "admin@rkchess2026.com" || password !== "rkchess2026@dmin") {
       return NextResponse.json(
         { error: "Invalid email or password." },

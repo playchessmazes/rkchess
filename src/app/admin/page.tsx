@@ -166,7 +166,7 @@ export default function AdminPage() {
                 <span>{formError}</span>
               </div>
             )}
-            
+
             {formSuccess && (
               <div className={`${styles.alert} ${styles.alertSuccess}`}>
                 <CheckCircle2 className={styles.alertIcon} size={16} />
@@ -181,11 +181,11 @@ export default function AdminPage() {
                 type="email"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="admin@rkchess2026.com"
+                placeholder="Enter email address"
                 className={styles.input}
                 required
                 disabled={isSubmitting}
-                autoComplete="email"
+                autoComplete="off"
               />
             </div>
 
@@ -200,7 +200,7 @@ export default function AdminPage() {
                 className={styles.input}
                 required
                 disabled={isSubmitting}
-                autoComplete="current-password"
+                autoComplete="new-password"
               />
             </div>
 

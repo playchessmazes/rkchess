@@ -573,23 +573,21 @@ _Note: Payment screenshot uploaded successfully._`;
             Tournament Entry Fee Payment
           </h3>
           
-          <p className={styles.paymentInstruction}>
-            Scan the QR code below to pay the entry fee of <strong>₹300</strong>. Take a screenshot of the payment confirmation and upload it here to secure your registration.
+          <p className={styles.paymentInfoText}>
+            Scan the QR code below to pay the entry fee of <strong>₹500</strong>. Take a screenshot of the payment confirmation and upload it here to secure your registration.
           </p>
 
-          <div className={styles.paymentBox}>
-            <div className={styles.qrContainer}>
-              <div className={styles.qrImageWrapper}>
-                <Image 
-                  src="/qr.jpeg" 
-                  alt="Payment QR Code" 
-                  width={150} 
-                  height={150}
-                  className={styles.qrImage}
-                  unoptimized
-                />
-              </div>
-              <span className={styles.qrLabel}>Scan to pay ₹300</span>
+          <div className={styles.qrCard}>
+            <div className={styles.qrImageWrapper}>
+              <Image 
+                src="/qr.jpeg" 
+                alt="UPI Payment QR Code" 
+                width={180} 
+                height={180}
+                className={styles.qrImage}
+                unoptimized
+              />
+              <span className={styles.qrLabel}>Scan to pay ₹500</span>
             </div>
 
             <div className={`${styles.fieldGroup} ${errors.paymentScreenshot ? styles.hasError : ""}`}>

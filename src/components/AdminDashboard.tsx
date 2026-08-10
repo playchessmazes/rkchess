@@ -13,7 +13,8 @@ import {
   CreditCard,
   Calendar,
   AlertTriangle,
-  LogOut
+  LogOut,
+  Trash2
 } from "lucide-react";
 import Link from "next/link";
 import styles from "./AdminDashboard.module.css";
@@ -44,6 +45,40 @@ export default function AdminDashboard({ initialData, error, onLogout }: AdminDa
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
   const [selectedScreenshot, setSelectedScreenshot] = useState<{ url: string; name: string } | null>(null);
+  const [isTournamentActive, setIsTournamentActive] = useState<boolean>(true);
+  const [isUpdatingSetting, setIsUpdatingSetting] = useState<boolean>(false);
+
+  // Fetch initial tournament setting
+  React.useEffect(() => {
+    fetch("/api/settings")
+      .then((res) => res.json())
+      .then((data) => {
+        if (typeof data.isTournamentActive === "boolean") {
+          setIsTournamentActive(data.isTournamentActive);
+        }
+      })
+      .catch((err) => console.error("Failed to load setting:", err));
+  }, []);
+
+  // Toggle tournament setting
+  const toggleTournamentSetting = async () => {
+    setIsUpdatingSetting(true);
+    const nextState = !isTournamentActive;
+    try {
+      const res = await fetch("/api/settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isTournamentActive: nextState }),
+      });
+      if (res.ok) {
+        setIsTournamentActive(nextState);
+      }
+    } catch (err) {
+      console.error("Failed updating setting:", err);
+    } finally {
+      setIsUpdatingSetting(false);
+    }
+  };
 
   // Category labels mapping
   const categoryLabels: { [key: string]: string } = {
@@ -69,7 +104,7 @@ export default function AdminDashboard({ initialData, error, onLogout }: AdminDa
   // Calculate statistics
   const totalCount = initialData.length;
   const filteredCount = filteredData.length;
-  const totalEntryFees = totalCount * 300;
+  const totalEntryFees = totalCount * 500;
   
   // Count by category
   const categoryCounts = initialData.reduce((acc: { [key: string]: number }, r) => {
@@ -132,9 +167,33 @@ export default function AdminDashboard({ initialData, error, onLogout }: AdminDa
           <p>Manage registrations for the Summer Open Chess Tournament (07-06-2026)</p>
         </div>
         <div className={styles.headerActions}>
+          {/* Tournament Toggle Button */}
+          <button
+            onClick={toggleTournamentSetting}
+            disabled={isUpdatingSetting}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.6rem 1.2rem",
+              borderRadius: "9999px",
+              fontWeight: 700,
+              fontSize: "0.9rem",
+              border: "none",
+              cursor: "pointer",
+              backgroundColor: isTournamentActive ? "#15803d" : "#dc2626",
+              color: "white",
+              transition: "all 0.2s ease",
+            }}
+            title="Toggle Tournament Page Route Visibility"
+          >
+            <Trophy size={16} />
+            Tournament Mode: {isTournamentActive ? "ON (Active)" : "OFF (Hidden)"}
+          </button>
+
           <Link href="/" className={`${styles.btnAction} ${styles.btnSecondary}`}>
             <ArrowLeft size={16} />
-            Back to Form
+            Website Home
           </Link>
           {onLogout && (
             <button onClick={onLogout} className={`${styles.btnAction} ${styles.btnSecondary}`}>
