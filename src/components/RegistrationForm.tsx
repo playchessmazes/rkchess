@@ -5,7 +5,7 @@ import {
   User, Calendar, Users, Phone, 
   Award, Hash, Trophy, MapPin, 
   Loader2, CheckCircle2, Copy, Check,
-  CreditCard, Upload
+  CreditCard, Upload, Building2
 } from "lucide-react";
 import Image from "next/image";
 import styles from "./RegistrationForm.module.css";
@@ -15,6 +15,7 @@ interface FormData {
   dob: string;
   gender: string;
   mobile: string;
+  club: string;
   fideId: string;
   fideRating: string;
   category: string;
@@ -105,6 +106,7 @@ export default function RegistrationForm() {
     dob: "",
     gender: "",
     mobile: "",
+    club: "",
     fideId: "",
     fideRating: "",
     category: "",
@@ -320,6 +322,7 @@ export default function RegistrationForm() {
       dob: "",
       gender: "",
       mobile: "",
+      club: "",
       fideId: "",
       fideRating: "",
       category: "",
@@ -353,6 +356,7 @@ export default function RegistrationForm() {
 *Category:* ${selectedCatLabel}
 *WhatsApp No:* ${formData.mobile}
 *City & State:* ${formData.cityState}
+${formData.club ? `*Club / School:* ${formData.club}` : ""}
 ${formData.fideId ? `*FIDE ID:* ${formData.fideId}` : ""}
 ${formData.fideRating ? `*FIDE Rating:* ${formData.fideRating}` : ""}
 
@@ -403,7 +407,12 @@ _Note: Payment screenshot uploaded successfully._`;
               <span className={styles.ticketLabel}>City & State</span>
               <span className={styles.ticketValue}>{formData.cityState}</span>
             </div>
-            {/* Email display removed */}
+            {formData.club && (
+              <div className={styles.ticketItem}>
+                <span className={styles.ticketLabel}>Club / School</span>
+                <span className={styles.ticketValue}>{formData.club}</span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -562,7 +571,21 @@ _Note: Payment screenshot uploaded successfully._`;
               {errors.cityState && <span className={styles.errorText}>{errors.cityState}</span>}
             </div>
 
-            {/* School / Club Name and Email Address fields have been removed */}
+            <div className={styles.fieldGroup}>
+              <label htmlFor="club">Club Name <span className={styles.optionalLabel}>(Optional)</span></label>
+              <div className={styles.inputWrapper}>
+                <Building2 className={styles.inputIcon} size={16} />
+                <input
+                  type="text"
+                  id="club"
+                  name="club"
+                  value={formData.club}
+                  onChange={handleInputChange}
+                  placeholder="e.g. RK Chess Academy / School"
+                  className={styles.input}
+                />
+              </div>
+            </div>
           </div>
         </div>
 

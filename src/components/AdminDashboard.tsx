@@ -31,6 +31,7 @@ interface Registration {
   fide_rating: number | null;
   category: string;
   academy_name: string | null;
+  club?: string | null;
   city_state: string;
   screenshot_url: string;
 }
@@ -95,7 +96,8 @@ export default function AdminDashboard({ initialData, error, onLogout }: AdminDa
     const nameMatch = (r.full_name || "").toLowerCase().includes(searchTerm.toLowerCase());
     const phoneMatch = (r.mobile || "").includes(searchTerm);
     const idMatch = (r.id || "").toLowerCase().includes(searchTerm.toLowerCase());
-    const textMatch = nameMatch || phoneMatch || idMatch;
+    const clubMatch = ((r.club || r.academy_name) || "").toLowerCase().includes(searchTerm.toLowerCase());
+    const textMatch = nameMatch || phoneMatch || idMatch || clubMatch;
 
     const categoryMatch = filterCategory === "all" || r.category === filterCategory;
     return textMatch && categoryMatch;
@@ -125,7 +127,7 @@ export default function AdminDashboard({ initialData, error, onLogout }: AdminDa
       "FIDE ID",
       "FIDE Rating",
       "Category",
-      "School/Academy",
+      "Club / School",
       "City & State",
       "Screenshot URL"
     ];
@@ -141,7 +143,7 @@ export default function AdminDashboard({ initialData, error, onLogout }: AdminDa
       r.fide_id || "",
       r.fide_rating || "",
       categoryLabels[r.category] || r.category.toUpperCase(),
-      `"${(r.academy_name || "").replace(/"/g, '""')}"`,
+      `"${((r.club || r.academy_name) || "").replace(/"/g, '""')}"`,
       `"${(r.city_state || "").replace(/"/g, '""')}"`,
       r.screenshot_url
     ]);
@@ -318,6 +320,11 @@ export default function AdminDashboard({ initialData, error, onLogout }: AdminDa
                     <td>
                       <div className={styles.playerCell}>
                         <span className={styles.playerName}>{player.full_name}</span>
+                        {(player.club || player.academy_name) && (
+                          <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)", fontWeight: 500 }}>
+                            🏛️ {player.club || player.academy_name}
+                          </span>
+                        )}
                         <code className={styles.playerId}>{player.id}</code>
                       </div>
                     </td>

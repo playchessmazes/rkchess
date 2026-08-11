@@ -37,9 +37,12 @@ export async function POST(request: Request) {
       fideRating,
       category,
       academyName,
+      club,
       cityState,
       paymentScreenshot,
     } = body;
+
+    const clubValue = club || academyName || null;
 
     // Validation
     if (!fullName || !dob || !gender || !mobile || !category || !cityState || !paymentScreenshot) {
@@ -108,7 +111,7 @@ export async function POST(request: Request) {
             fide_id: fideId || null,
             fide_rating: fideRating ? parseInt(fideRating) : null,
             category: category,
-            academy_name: academyName || null,
+            academy_name: clubValue,
             city_state: cityState,
             screenshot_url: screenshotUrl
           });
@@ -129,7 +132,8 @@ export async function POST(request: Request) {
       fide_id: fideId || null,
       fide_rating: fideRating ? parseInt(fideRating) : null,
       category: category,
-      academy_name: academyName || null,
+      academy_name: clubValue,
+      club: clubValue,
       city_state: cityState,
       screenshot_url: screenshotUrl
     });
