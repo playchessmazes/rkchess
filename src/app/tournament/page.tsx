@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,6 +9,16 @@ import {
 import RegistrationForm from "@/components/RegistrationForm";
 import { getTournamentActiveSetting } from "@/utils/settings";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = {
+  title: "Tournament Registration - RK Chess Academy",
+  description: "Official registration portal for the 2nd Open Chess Tournament 2026 organized by RK Chess Academy, Anantapuramu. Total cash prizes ₹32,000 & 64 Trophies!",
+  openGraph: {
+    title: "2nd Open Chess Tournament 2026 | RK Chess Academy",
+    description: "Register online for the 2nd Open Chess Tournament in Anantapur. Cash prize pool ₹32,000 + 64 Trophies & free lunch for all players.",
+    images: ["/logo.jpeg"],
+  },
+};
 
 export default async function TournamentPage() {
   const isTournamentActive = await getTournamentActiveSetting();
