@@ -137,6 +137,12 @@ export default async function TournamentPage() {
                 <CreditCard size={18} /> ENTRY FEE: ₹500
               </div>
             </div>
+
+            <div className={styles.heroActions}>
+              <a href="#register-form" className={styles.heroRegisterBtn}>
+                ✍️ REGISTER PLAYER NOW (₹500)
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -233,26 +239,28 @@ export default async function TournamentPage() {
                 <Award size={22} className={styles.cardTitleIcon} />
                 Open Category Cash Prizes (Total ₹17,000)
               </h3>
-              <table className={styles.prizeTable}>
-                <thead>
-                  <tr>
-                    <th>Rank</th>
-                    <th>Prize Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>1st Prize</td><td>₹5,000 + Trophy</td></tr>
-                  <tr><td>2nd Prize</td><td>₹3,000 + Trophy</td></tr>
-                  <tr><td>3rd Prize</td><td>₹2,000 + Trophy</td></tr>
-                  <tr><td>4th Prize</td><td>₹1,500 + Trophy</td></tr>
-                  <tr><td>5th Prize</td><td>₹1,200 + Trophy</td></tr>
-                  <tr><td>6th Prize</td><td>₹1,000 + Trophy</td></tr>
-                  <tr><td>7th Prize</td><td>₹900 + Trophy</td></tr>
-                  <tr><td>8th Prize</td><td>₹850 + Trophy</td></tr>
-                  <tr><td>9th Prize</td><td>₹800 + Trophy</td></tr>
-                  <tr><td>10th Prize</td><td>₹750 + Trophy</td></tr>
-                </tbody>
-              </table>
+              <div className={styles.tableWrapper}>
+                <table className={styles.prizeTable}>
+                  <thead>
+                    <tr>
+                      <th>Rank</th>
+                      <th>Prize Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1st Prize</td><td>₹5,000 + Trophy</td></tr>
+                    <tr><td>2nd Prize</td><td>₹3,000 + Trophy</td></tr>
+                    <tr><td>3rd Prize</td><td>₹2,000 + Trophy</td></tr>
+                    <tr><td>4th Prize</td><td>₹1,500 + Trophy</td></tr>
+                    <tr><td>5th Prize</td><td>₹1,200 + Trophy</td></tr>
+                    <tr><td>6th Prize</td><td>₹1,000 + Trophy</td></tr>
+                    <tr><td>7th Prize</td><td>₹900 + Trophy</td></tr>
+                    <tr><td>8th Prize</td><td>₹850 + Trophy</td></tr>
+                    <tr><td>9th Prize</td><td>₹800 + Trophy</td></tr>
+                    <tr><td>10th Prize</td><td>₹750 + Trophy</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             {/* Category Prizes */}
@@ -261,19 +269,21 @@ export default async function TournamentPage() {
                 <Trophy size={22} className={styles.cardTitleIcon} />
                 Age Category Prizes (U7, U9, U11, U13, U15)
               </h3>
-              <table className={styles.prizeTable}>
-                <thead>
-                  <tr>
-                    <th>Position</th>
-                    <th>Prize</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>1st Prize</td><td>₹800 + Trophy</td></tr>
-                  <tr><td>2nd Prize</td><td>₹500 + Trophy</td></tr>
-                  <tr><td>3rd, 4th & 5th Prizes</td><td>Trophy</td></tr>
-                </tbody>
-              </table>
+              <div className={styles.tableWrapper}>
+                <table className={styles.prizeTable}>
+                  <thead>
+                    <tr>
+                      <th>Position</th>
+                      <th>Prize</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1st Prize</td><td>₹800 + Trophy</td></tr>
+                    <tr><td>2nd Prize</td><td>₹500 + Trophy</td></tr>
+                    <tr><td>3rd, 4th & 5th Prizes</td><td>Trophy</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             {/* Special Trophies */}
@@ -335,7 +345,7 @@ export default async function TournamentPage() {
           </div>
 
           {/* Right Column: Player Registration Form */}
-          <div>
+          <div id="register-form">
             <div className={styles.infoCard}>
               <h3 className={styles.cardTitle}>Register for Tournament</h3>
               <p style={{ color: "var(--text-secondary)", marginBottom: "1.5rem" }}>
